@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%--<%@ page import="ru.work.dream.store.PsqlStore" %>--%>
+<%@ page import="ru.work.dream.store.PsqlStore" %>
 <%@ page import="ru.work.dream.store.MemStore" %>
 <%@ page import="ru.work.dream.model.Post" %>
 <%@ page import="java.util.Collection" %>
@@ -32,16 +32,26 @@
 
     <div class="row">
         <div class="card" style="width: 100%">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post.do">Вакансии</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate.do">Кандидаты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/logout.do"><c:out value="${user.name}"/>|Выйти</a>
+                </li>
+            </ul>
             <div class="card-header">
-                <ul class="nav">
-                    Вакансии
-                    <li>
-<%--                        <a class="nav-link" href="<%=request.getContextPath()%>/auto.do">--%>
-<%--                            <c:out value="${user.name}"/>|Выйти</a>--%>
-                    </li>
-                </ul>
+                Вакансии
             </div>
-
             <div class="card-body">
                 <table class="table">
                     <thead>
@@ -50,16 +60,16 @@
                     </tr>
                     </thead>
                     <tbody>
-<%--                    <c:forEach items="${posts}" var="post">--%>
-<%--                        <tr>--%>
-<%--                            <td>--%>
-<%--                                <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>--%>
-<%--                                    <i class="fa fa-edit mr-3"></i>--%>
-<%--                                </a>--%>
-<%--                                <c:out value="${post.name}"/>--%>
-<%--                            </td>--%>
-<%--                        </tr>--%>
-<%--                    </c:forEach>--%>
+                    <c:forEach items="${posts}" var="post">
+                        <tr>
+                            <td>
+                                <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
+                                    <i class="fa fa-edit mr-3"></i>
+                                </a>
+                                <c:out value="${post.name}"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

@@ -27,21 +27,29 @@
 <body>
 
 
-
 <div class="container pt-3">
 
     <div class="row">
         <div class="card" style="width: 100%">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post.do">Вакансии</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate.do">Кандидаты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/logout.do"><c:out value="${user.name}"/>|Выйти</a>
+                </li>
+            </ul>
             <div class="card-header">
-
-                <ul class="nav">
-                    <li>Кандидаты</li>
-<%--                    <li>--%>
-<%--                        <a class="nav-link" href="<%=request.getContextPath()%>/auto.do">--%>
-<%--                            <c:out value="${user.name}"/>|Выйти</a>--%>
-<%--                    </li>--%>
-                </ul>
-
+                Кандидаты
             </div>
             <div class="card-body">
                 <table class="table">
@@ -52,27 +60,27 @@
                         <th scope="col">город</th>
                     </tr>
                     </thead>
-<%--                    <tbody>--%>
-<%--                    <c:forEach items="${candidates}" var="post">--%>
-<%--                        <tr>--%>
-<%--                            <td>--%>
-<%--                                <a href='<c:url value="candidate/edit.jsp?id=${post.id}"/>'>--%>
-<%--                                    <i class="fa fa-edit mr-3"></i>--%>
-<%--                                </a>--%>
-<%--                                <c:out value="${post.name}"/>--%>
-<%--                            </td>--%>
-<%--                            <td>--%>
+                    <tbody>
+                    <c:forEach items="${candidates}" var="post">
+                        <tr>
+                            <td>
+                                <a href='<c:url value="candidate/edit.jsp?id=${post.id}"/>'>
+                                    <i class="fa fa-edit mr-3"></i>
+                                </a>
+                                <c:out value="${post.name}"/>
+                            </td>
+                            <td>
 <%--                                <c:out value="${post.id}"/>--%>
-<%--                                <img src="<c:url value='/download?name=${post.id}'/>" width="100px" height="100px"/>--%>
-<%--                                <a href='<c:url value="photoUpload.jsp?id=${post.id}"/>'>Добавить фото</a>--%>
+                                <img src="<c:url value='/download?name=${post.id}'/>" width="100px" height="100px"/>
+                                <a href='<c:url value="photoUpload.jsp?id=${post.id}"/>'>Добавить фото</a>
 <%--                                <a href='<c:url value="candidate/edit.jsp?id=${post.id}"/>'>Удалить кандидата</a>--%>
-<%--                            </td>--%>
-<%--                            <td>--%>
-<%--                                <c:out value="${post.city}"/>--%>
-<%--                            </td>--%>
-<%--                        </tr>--%>
-<%--                    </c:forEach>--%>
-<%--                    </tbody>--%>
+                            </td>
+                            <td>
+                                <c:out value="${post.city}"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
                 </table>
             </div>
         </div>

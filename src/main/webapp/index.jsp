@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%--<%@ page import="ru.job4j.dream.store.PsqlStore" %>--%>
+<%@ page import="ru.work.dream.store.PsqlStore" %>
 <%@ page import="ru.work.dream.store.MemStore" %>
 <%@ page import="ru.work.dream.model.Post" %>
 <%@ page import="ru.work.dream.model.Candidate" %>
@@ -30,24 +30,25 @@
 <div class="container">
     <div class="row">
         <ul class="nav">
-<%--            <li class="nav-item">--%>
-<%--                <a class="nav-link" href="<%=request.getContextPath()%>/post.do">Вакансии</a>--%>
-<%--            </li>--%>
-<%--            <li class="nav-item">--%>
-<%--                <a class="nav-link" href="<%=request.getContextPath()%>/candidate.do">Кандидаты</a>--%>
-<%--            </li>--%>
-<%--            <li class="nav-item">--%>
-<%--                <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>--%>
-<%--            </li>--%>
-<%--            <li class="nav-item">--%>
-<%--                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <a class="nav-link" href="<%=request.getContextPath()%>/auto.do">Войти</a>--%>
-<%--            </li>--%>
-<%--            <li>--%>
-<%--                <a class="nav-link" href="<%=request.getContextPath()%>/auto.do"> <c:out value="${user.name}"/>|Выйти</a>--%>
-<%--            </li>--%>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/post.do">Вакансии</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate.do">Кандидаты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+            </li>
+            <li>
+                <a class="nav-link" href="<%=request.getContextPath()%>/auto.do">Войти</a>
+            </li>
+            <li>
+                <a class="nav-link" href="<%=request.getContextPath()%>/logout.do"> <c:out
+                        value="${user.name}"/>|Выйти</a>
+            </li>
         </ul>
     </div>
     <div class="row">

@@ -4,6 +4,7 @@
 <%@ page import="ru.work.dream.model.Candidate" %>
 <%@ page import="java.lang.reflect.Array" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="ru.work.dream.store.PsqlStore" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -30,83 +31,95 @@
 </head>
 <body>
 
-<%--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>--%>
-<%--<script>--%>
-<%--    function validate() {--%>
-<%--        valid = true;--%>
-<%--        if (document.contact_form.name.value == "") {--%>
-<%--            alert("Пожалуйста заполните поле 'Имя'.")--%>
-<%--            valid = false;--%>
-<%--        }--%>
-<%--        return valid;--%>
-<%--    }--%>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    function validate() {
+        valid = true;
+        if (document.contact_form.name.value == "") {
+            alert("Пожалуйста заполните поле 'Имя'.")
+            valid = false;
+        }
+        return valid;
+    }
 
-<%--    function readCity() {--%>
-<%--        $.ajax({--%>
-<%--            type: 'GET',--%>
-<%--            url: 'http://localhost:8080/dreamjob/city',--%>
-<%--            dataType: 'json'--%>
-<%--        }).done(function (data) {--%>
-<%--            var objSel = document.getElementById("city");--%>
-<%--            var cities = "";--%>
-<%--            for (i = 0; i < data.length; i++) {--%>
-<%--                cities += "<option value=" + data[i] + ">" + data[i] + "</option>";--%>
-<%--            }--%>
-<%--            $('#city').html(cities);--%>
-<%--        }).fail(function (err) {--%>
-<%--            alert("err");--%>
-<%--            alert(err);--%>
-<%--        });--%>
-<%--    }--%>
-<%--</script>--%>
+    function readCity() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/dreamjob/city',
+            dataType: 'json'
+        }).done(function (data) {
+            var objSel = document.getElementById("city");
+            var cities = "";
+            for (i = 0; i < data.length; i++) {
+                cities += "<option value=" + data[i] + ">" + data[i] + "</option>";
+            }
+            $('#city').html(cities);
+        }).fail(function (err) {
+            alert("err");
+            alert(err);
+        });
+    }
+</script>
 
 
-<%--<%--%>
-<%--    String id = request.getParameter("id");--%>
-<%--    Candidate candidate = new Candidate(0, "", "");--%>
-<%--    if (id != null) {--%>
-<%--        candidate = PsqlStore.instOf().findByIdCan(Integer.valueOf(id));--%>
-<%--    }--%>
-<%--%>--%>
+<%
+    String id = request.getParameter("id");
+    Candidate candidate = new Candidate(0, "", "");
+    if (id != null) {
+        candidate = PsqlStore.instOf().findByIdCan(Integer.valueOf(id));
+    }
+%>
 
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post.do">Вакансии</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate.do">Кандидаты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить
+                        кандидата</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/logout.do"><c:out value="${user.name}"/>|Выйти</a>
+                </li>
+            </ul>
             <div class="card-header">
-<%--                <ul class="nav">--%>
-<%--                    <%if (id == null) {%>--%>
-<%--                    <li>Новый кандидат</li>--%>
-<%--                    <%} else {%>--%>
-<%--                    <li>Редактирование кандидата</li>--%>
-<%--                    <%}%>--%>
-<%--                    <li>--%>
-<%--                        <a class="nav-link" href="<%=request.getContextPath()%>/auto.do">--%>
-<%--                            <c:out value="${user.name}"/>|Выйти</a>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-
+                <%if (id == null) {%>
+                Новый кандидат
+                <%} else {%>
+                Редактирование кандидата
+                <%}%>
             </div>
-<%--            <div class="card-body">--%>
-<%--                <form name="contact_form" action="<%=request.getContextPath()%>/candidate.do?id=<%=candidate.getId()%>"--%>
-<%--                      method="post" onsubmit="return validate();">--%>
-<%--                    <div class="form-group">--%>
-<%--                        <label>Имя</label>--%>
-<%--                        &lt;%&ndash;<input type="text" class="form-control" name="name">&ndash;%&gt;--%>
-<%--                        <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>" id="name"--%>
-<%--                               onclick="return readCity();">--%>
-<%--                        <label for="city">Город</label>--%>
-<%--                        <select class="form-control" name="city" id="city">--%>
-<%--                        </select>--%>
-<%--                        </button>--%>
-
-<%--                    </div>--%>
-<%--                    <button type="submit" class="btn btn-primary">Сохранить</button>--%>
-<%--                </form>--%>
-<%--                <form action="<%=request.getContextPath()%>/candidateDelete.do?id=<%=candidate.getId()%>" method="post">--%>
-<%--                    <button type="submit" class="btn btn-primary">Удалить</button>--%>
-<%--                </form>--%>
-
-<%--            </div>--%>
+            <div class="card-body">
+                <form name="contact_form" action="<%=request.getContextPath()%>/candidate.do?id=<%=candidate.getId()%>"
+                      method="post" onsubmit="return validate();">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <%--<input type="text" class="form-control" name="name">--%>
+                        <input type="text" class="form-control" name="name" value="<%=candidate.getName()%>" id="name"
+                               onclick="return readCity();">
+                        <label for="city">Город</label>
+                        <select class="form-control" name="city" id="city">
+                        </select>
+                        <%--                        </button>--%>
+<%--                        <br>--%>
+<%--                        <img src="<c:url value='/download?name=${candidate.getId}'/>" width="100px" height="100px"/>--%>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+                <br>
+                <form action="<%=request.getContextPath()%>/candidateDelete.do?id=<%=candidate.getId()%>" method="post">
+                    <button type="submit" class="btn btn-primary">Удалить</button>
+                </form>
+             </div>
         </div>
     </div>
 </div>

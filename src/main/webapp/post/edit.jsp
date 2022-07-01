@@ -2,6 +2,7 @@
 <%--<%@ page import="ru.work.dream.store.PsqlStore" %>--%>
 <%@ page import="ru.work.dream.store.MemStore" %>
 <%@ page import="ru.work.dream.model.Post" %>
+<%@ page import="ru.work.dream.store.PsqlStore" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -24,54 +25,66 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<%--    <script>--%>
-<%--        function validate() {--%>
-<%--            valid = true;--%>
-<%--            if (document.contact_form.name.value == "") {--%>
-<%--                alert("Пожалуйста заполните поле 'Имя'.")--%>
-<%--                valid = false;--%>
-<%--            }--%>
-<%--            return valid;--%>
-<%--        }--%>
-<%--    </script>--%>
+    <script>
+        function validate() {
+            valid = true;
+            if (document.contact_form.name.value == "") {
+                alert("Пожалуйста заполните поле 'Имя'.")
+                valid = false;
+            }
+            return valid;
+        }
+    </script>
 
     <title>Работа мечты</title>
 </head>
 <body>
 
-<%--<%--%>
-<%--    String id = request.getParameter("id");--%>
-<%--    Post post = new Post(0, "");--%>
-<%--    if (id != null) {--%>
-<%--        post = PsqlStore.instOf().findById(Integer.valueOf(id));--%>
-<%--    }--%>
-<%--%>--%>
+<%
+    String id = request.getParameter("id");
+    Post post = new Post(0, "");
+    if (id != null) {
+        post = PsqlStore.instOf().findById(Integer.valueOf(id));
+    }
+%>
 
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post.do">Вакансии</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate.do">Кандидаты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить
+                        кандидата</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/logout.do"><c:out value="${user.name}"/>|Выйти</a>
+                </li>
+            </ul>
             <div class="card-header">
-<%--                <ul class="nav">--%>
-<%--                    <% if (id == null) {%>--%>
-<%--                    Новая вакансия--%>
-<%--                    <%} else { %>--%>
-<%--                    Редактировать вакансии.--%>
-<%--                    <%}%>--%>
-<%--                    <li>--%>
-<%--                        <a class="nav-link" href="<%=request.getContextPath()%>/auto.do">--%>
-<%--                            <c:out value="${user.name}"/>|Выйти</a>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-
+                <% if (id == null) {%>
+                Новая вакансия
+                <%} else { %>
+                Редактировать вакансию
+                <%}%>
             </div>
             <div class="card-body">
-<%--                <form name="contact_form" action="<%=request.getContextPath()%>/post.do?id=<%=post.getId()%>" method="post" onsubmit="return validate();">--%>
-<%--                    <div class="form-group">--%>
-<%--                        <label>Имя</label>--%>
-<%--                        <input type="text" class="form-control" name="name" value="<%=post.getName()%>" id="name">--%>
-<%--                    </div>--%>
-<%--                    <button type="submit" class="btn btn-primary">Сохранить</button>--%>
-<%--                </form>--%>
+                <form name="contact_form" action="<%=request.getContextPath()%>/post.do?id=<%=post.getId()%>"
+                      method="post" onsubmit="return validate();">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" class="form-control" name="name" value="<%=post.getName()%>" id="name">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
             </div>
         </div>
     </div>
